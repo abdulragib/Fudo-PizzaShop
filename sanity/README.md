@@ -10,8 +10,12 @@ Now you can do the following things:
 
 sanity setup:
 
-make one sanity folder in next project
-go inside sanity folder
-install sanity cli
-then run sanity init to initialize project
-then run sanity bu yarn dev or sanity dev
+Make one sanity folder in next project
+Go inside sanity folder
+Install sanity cli
+Then run sanity init to initialize project
+Then run sanity bu yarn dev or sanity dev
+Then make schema by make one pizza.js and import it to index.js
+Then we need to connect sanity to next js by using sanity-client(install)
+Then we also use sanity/image-url(install)
+
