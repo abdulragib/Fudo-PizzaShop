@@ -1,6 +1,7 @@
 import Image from "next/image";
 import css from "../styles/menu.module.css";
 import { urlFor } from "../lib/client";
+import Link from 'next/Link';
 
 export default function Menu({ pizzas }) {
   return (
@@ -18,6 +19,7 @@ export default function Menu({ pizzas }) {
 
           return (
             <div key={id} className={css.pizza}>
+            <Link href={`./pizza/${pizza.slug.current}`}>
               <div className={css.ImageWrapper}>
                 <Image
                   loader={() => src}
@@ -27,6 +29,7 @@ export default function Menu({ pizzas }) {
                   layout="fill"
                 />
               </div>
+            </Link>
 
               <span>{pizza.name}</span>
               <span>
