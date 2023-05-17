@@ -1,7 +1,7 @@
 import Image from "next/image";
 import css from "../styles/menu.module.css";
 import { urlFor } from "../lib/client";
-import Link from 'next/Link';
+import Link from 'next/link';
 
 export default function Menu({ pizzas }) {
   return (
