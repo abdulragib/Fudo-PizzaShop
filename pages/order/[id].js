@@ -66,16 +66,37 @@ export default function Orders({order}){
                            <Image src={Spinner} alt=""/>
                        </div>
                      }
+
+                     {order.status > 1 && 
+                       <span className={css.completed}>Completed</span>
+                     }
                 </div>
 
                 <div className={css.status}>
                         <Image src={Onway} width={50} height={50} alt=""/>
-                        <span className="on-the-way">On the Way</span>
+                        <span>On the Way</span>
+                        {order.status===2 && 
+                       <div className={css.spinner}>
+                           <Image src={Spinner} alt=""/>
+                       </div>
+                     }
+
+                     {order.status > 2 && 
+                       <span className={css.completed}>Completed</span>
+                     }
                 </div>
 
                 <div className={css.status}>
                     <UilBox width={50} height={50}/>
                     <span>Delivered</span>
+                    {order.status===3 && 
+                       <div className={css.spinner}>
+                           <Image src={Spinner} alt=""/>
+                       </div>
+                     }
+                      {order.status > 3 && 
+                       <span className={css.completed}>Completed</span>
+                     }
                 </div>
            </div>
         </div>

@@ -61,5 +61,18 @@
     border-radius:1rem;
     color:white;
 }
+
+/* on the way */
+.status:nth-of-type(3) span {
+    white-space: nowrap;
+  }
+
+  .completed{
+    border-radius:1rem;
+    color:white;
+    background-color: rgb(159 230 53);
+    padding:0.5rem;
+    font-size:0.8rem;
+  }
   
 
