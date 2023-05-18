@@ -1,7 +1,11 @@
+import Image from "next/image";
 import Layout from "../../components/Layout"
 import { client } from "../../lib/client"
 import css from '../../styles/order.module.css'
-
+import {UilBill,UilBox} from '@iconscout/react-unicons';
+import cooking from '../../assets/cooking.png'
+import Onway from '../../assets/Onway.png'
+import Spinner from '../../assets/spinner.svg'
 
 export const getServerSideProps = async(context)=>{
     const { id = "" } = context.params;
@@ -21,6 +25,59 @@ export default function Orders({order}){
            <span className={css.heading}>
                 Order in Process
            </span>
+           <div className={css.details}>
+               <div>
+                     <span>Order ID</span>
+                     <span>{order._id}</span>
+               </div>
+               <div>
+                     <span>Customer Name</span>
+                     <span>{order.name}</span>
+               </div>
+               <div>
+                    <span>Phone</span>
+                    <span>{order.phone}</span>
+               </div>
+               <div>
+                     <span>Method</span>
+                     <span>{order.method === 0 ? 'Cash on Delivery' : "Online Payment (Paid)" }</span>
+               </div>
+               <div>
+                     <span>Total</span>
+                     <span>$ {order.total}</span>
+               </div>
+           </div>
+
+           <div className={css.statusContainer}>
+               <div className={css.status}>
+                   <UilBill width={50} height={50}/>
+                   <span>Payment</span>
+                   {order.method===0 ?
+                   <span className={css.pending}> On Delivery</span> : 
+                   <span className={css.completed}>Completed</span>
+                   }
+               </div>
+
+                <div className={css.status}>
+                     <Image src={cooking} width={50} height={50} alt=""/>
+                     <span>Cooking</span>
+                     {order.status===1 && 
+                       <div className={css.spinner}>
+                           <Image src={Spinner} alt=""/>
+                       </div>
+                     }
+                </div>
+
+                <div className={css.status}>
+                        <Image src={Onway} width={50} height={50} alt=""/>
+                        <span className="on-the-way">On the Way</span>
+                </div>
+
+                <div className={css.status}>
+                    <UilBox width={50} height={50}/>
+                    <span>Delivered</span>
+                </div>
+           </div>
         </div>
     </Layout>
   )
