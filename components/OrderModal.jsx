@@ -4,9 +4,11 @@ import css from '../styles/orderModal.module.css'
 import { createOrder } from '../lib/orderHandler';
 import {useStore} from '../store/store'
 import toast,{Toaster} from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 export default function OrderModal ({opened,setOpened,PaymentMethod}) {
     const theme=useMantineTheme();
+    const router =useRouter();
     const [FormData,setFormData]=useState({});
     console.log(FormData)
 
@@ -26,7 +28,9 @@ export default function OrderModal ({opened,setOpened,PaymentMethod}) {
         {
           typeof window !== 'undefined' && localStorage.setItem('order',id)
         }
-        setOpened(null)
+        setOpened(null)//for closing of modal box after order palced
+
+        router.push(`/order/${id}`)
     }
   return(
     <Modal overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9]: theme.colors.gray[2]}

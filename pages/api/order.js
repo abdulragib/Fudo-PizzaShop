@@ -6,7 +6,7 @@ export default async function handler(req,res){
             const newOrder = await JSON.parse(req.body)
             try{
                await client.create({
-                    _type:"Order",
+                    _type:"order",
                     name:newOrder.name,
                     phone:newOrder.phone,
                     address:newOrder.address,
