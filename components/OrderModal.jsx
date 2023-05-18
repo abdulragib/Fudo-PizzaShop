@@ -20,9 +20,13 @@ export default function OrderModal ({opened,setOpened,PaymentMethod}) {
     const handleSubmit = async(e)=>{
         e.preventDefault();
         const id = await createOrder({...FormData,total,PaymentMethod})
-        console.log("Order placed",id);
+        console.log("Order placed-> ",id);
         toast.success("Order Placed")
         resetCart();
+        {
+          typeof window !== 'undefined' && localStorage.setItem('order',id)
+        }
+        setOpened(null)
     }
   return(
     <Modal overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9]: theme.colors.gray[2]}

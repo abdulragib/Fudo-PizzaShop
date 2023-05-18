@@ -26,10 +26,10 @@ export const useStore=create(
         })),
 
         //Remove Cart Pizza after order place
-        resetCart: () => set(()=>{
-            cart:{
+        resetCart: () => set(()=>({
+            cart: {
                 pizzas:[]
             }
-        })
+        }))
     })
 )
