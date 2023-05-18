@@ -23,6 +23,13 @@ export const useStore=create(
               //_ refers to each pizza
               pizzas: state.cart.pizzas.filter((_,i) => i !=index)
            }
-        }))
+        })),
+
+        //Remove Cart Pizza after order place
+        resetCart: () => set(()=>{
+            cart:{
+                pizzas:[]
+            }
+        })
     })
 )
