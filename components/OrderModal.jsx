@@ -25,8 +25,10 @@ export default function OrderModal ({opened,setOpened,PaymentMethod}) {
         console.log("Order placed-> ",id);
         toast.success("Order Placed")
         resetCart();
+
+        if(typeof window !== 'undefined')
         {
-          typeof window !== 'undefined' && localStorage.setItem('order',id)
+          localStorage.setItem('order',id)
         }
         setOpened(null)//for closing of modal box after order palced
 

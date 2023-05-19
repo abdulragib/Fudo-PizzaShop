@@ -6,6 +6,7 @@ import {UilBill,UilBox} from '@iconscout/react-unicons';
 import cooking from '../../assets/cooking.png'
 import Onway from '../../assets/Onway.png'
 import Spinner from '../../assets/spinner.svg'
+import { useEffect } from "react";
 
 export const getServerSideProps = async(context)=>{
     const { id = "" } = context.params;
@@ -19,6 +20,13 @@ export const getServerSideProps = async(context)=>{
     }
 }
 export default function Orders({order}){
+
+  useEffect(()=>{
+    if(order.status>3)
+    { 
+      localStorage.clear();
+    }
+  },[order])
   return(
     <Layout>
         <div className={css.container}>
