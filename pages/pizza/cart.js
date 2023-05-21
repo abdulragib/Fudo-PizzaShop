@@ -1,33 +1,55 @@
-import React,{useState} from "react"
+import React, { useState } from "react";
 import Image from "next/image";
 import Layout from "../../components/Layout";
 import css from "../../styles/cart.module.css";
 import { useStore } from "../../store/store";
 import { urlFor } from "../../lib/client";
-import  toast,{Toaster} from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import OrderModal from "../../components/OrderModal";
+import { useRouter } from "next/router";
 
 export default function Cart() {
   const CartData = useStore((state) => state.cart);
-  const removePizza = useStore((state)=>state.removePizza);
-  const [PaymentMethod,setPaymentMethod]=useState(null)
+  const removePizza = useStore((state) => state.removePizza);
+  const [PaymentMethod, setPaymentMethod] = useState(null);
 
-  const handleRemove=(i)=>{
+  const handleRemove = (i) => {
     removePizza(i);
     toast.error("Item Removed");
-  }
+  };
 
-  const total=()=>CartData.pizzas.reduce((a,b)=>a+b.quantity*b.price,0)
+  const router = useRouter();
 
-  const handleOnDelivery=()=>{
-    setPaymentMethod(0);
-    typeof window !== 'undefined' &&  localStorage.setItem('total',total())
-  }
+  const total = () =>
+    CartData.pizzas.reduce((a, b) => a + b.quantity * b.price, 0);
+
+  const handleOnDelivery = () => {
+    if (CartData.pizzas.length > 0) {
+      setPaymentMethod(0);
+      typeof window !== "undefined" && localStorage.setItem("total", total());
+    }
+  };
+
+  const handleCheckOut = async () => {
+    typeof window !== 'undefined' && localStorage.setItem('total',total())
+    setPaymentMethod(1);
+    const response = await fetch('/api/stripe',{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify(CartData.pizzas),
+    });
+
+    if(response.status===500) return;
+    const data = await response.json();
+    toast.loading("Redirecting...");
+    router.push(data.url)
+  };
 
   return (
     <Layout>
       <div className={css.container}>
-
         {/* details */}
         <div className={css.details}>
           <table className={css.table}>
@@ -68,13 +90,18 @@ export default function Cart() {
                       <td>
                         <span style={{ color: "var(--themeRed)" }}>$ </span>
                         {pizza.price}
-                        </td>
+                      </td>
                       <td>{pizza.quantity}</td>
                       <td>
                         <span style={{ color: "var(--themeRed)" }}>$ </span>
                         {pizza.price * pizza.quantity}
-                        </td>
-                      <td style={{color:"var(--themeRed)",cursor:"pointer"}} onClick={()=>handleRemove(i)}>x</td>
+                      </td>
+                      <td
+                        style={{ color: "var(--themeRed)", cursor: "pointer" }}
+                        onClick={() => handleRemove(i)}
+                      >
+                        x
+                      </td>
                     </tr>
                   );
                 })}
@@ -82,34 +109,38 @@ export default function Cart() {
           </table>
         </div>
 
-
-         {/* summary */}
+        {/* summary */}
         <div className={css.cart}>
-           <span>Cart</span>
-           <div className={css.CartDetails}>
-                <div>
-                    <span>Items</span>
-                    <span> {CartData.pizzas.length}</span>
-                </div>
+          <span>Cart</span>
+          <div className={css.CartDetails}>
+            <div>
+              <span>Items</span>
+              <span> {CartData.pizzas.length}</span>
+            </div>
 
-                <div>
-                    <span>Total</span>
-                    <span>$ {total()}</span>
-                </div>
-           </div>
+            <div>
+              <span>Total</span>
+              <span>$ {total()}</span>
+            </div>
+          </div>
 
-           <div className={css.buttons}>
-               <button className="btn" onClick={handleOnDelivery}>Pay on Delivery</button>
-               <button className="btn">Pay on now</button>
-           </div>
+          <div className={css.buttons}>
+            <button className="btn" onClick={handleOnDelivery}>
+              Pay on Delivery
+            </button>
+            <button className="btn" onClick={handleCheckOut}>
+              Pay on now
+            </button>
+          </div>
         </div>
       </div>
-      <Toaster/>
+      <Toaster />
 
       {/* Modal */}
-      <OrderModal opened={PaymentMethod===0} 
-       setOpened={setPaymentMethod}
-       PaymentMethod={PaymentMethod}
+      <OrderModal
+        opened={PaymentMethod === 0}
+        setOpened={setPaymentMethod}
+        PaymentMethod={PaymentMethod}
       />
     </Layout>
   );

@@ -111,3 +111,6 @@ export default function Orders({order}){
     </Layout>
   )
 }
+
+//after creating order, we router to id.js page , here we will
+// show all details of order and tracking of order
