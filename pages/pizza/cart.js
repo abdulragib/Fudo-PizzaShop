@@ -12,6 +12,9 @@ export default function Cart() {
   const CartData = useStore((state) => state.cart);
   const removePizza = useStore((state) => state.removePizza);
   const [PaymentMethod, setPaymentMethod] = useState(null);
+  const [Order, setOrder] = useState(
+    typeof window !== "undefined" && localStorage.getItem("order")
+  );
 
   const handleRemove = (i) => {
     removePizza(i);
@@ -31,20 +34,20 @@ export default function Cart() {
   };
 
   const handleCheckOut = async () => {
-    typeof window !== 'undefined' && localStorage.setItem('total',total())
+    typeof window !== "undefined" && localStorage.setItem("total", total());
     setPaymentMethod(1);
-    const response = await fetch('/api/stripe',{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
+    const response = await fetch("/api/stripe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      body:JSON.stringify(CartData.pizzas),
+      body: JSON.stringify(CartData.pizzas),
     });
 
-    if(response.status===500) return;
+    if (response.status === 500) return;
     const data = await response.json();
     toast.loading("Redirecting...");
-    router.push(data.url)
+    router.push(data.url);
   };
 
   return (
@@ -124,14 +127,16 @@ export default function Cart() {
             </div>
           </div>
 
-          <div className={css.buttons}>
-            <button className="btn" onClick={handleOnDelivery}>
-              Pay on Delivery
-            </button>
-            <button className="btn" onClick={handleCheckOut}>
-              Pay on now
-            </button>
-          </div>
+          {!Order && CartData.pizzas.length > 0 ? (
+            <div className={css.buttons}>
+              <button className="btn" onClick={handleOnDelivery}>
+                Pay on Delivery
+              </button>
+              <button className="btn" onClick={handleCheckOut}>
+                Pay on now
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
       <Toaster />
