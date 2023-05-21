@@ -47,3 +47,25 @@
     width:20rem;
     text-align:center;
 }
+
+@media only screen and (max-width:768px){
+    .heading{
+        font-size:0.5rem !important;
+        margin-top:22rem;
+
+    }
+    
+    .heading>:nth-child(1){
+        font-size:1rem;
+        color:var(--themeRed);
+    }
+    
+    .heading>:nth-child(2),.heading>:nth-child(3){
+        font-size:1.5rem;
+        color:var(--themeBlue);
+    }
+
+    .services{
+        flex-direction: column !important;
+    }
+}
