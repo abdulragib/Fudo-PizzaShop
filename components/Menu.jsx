@@ -31,9 +31,13 @@ export default function Menu({ pizzas }) {
               </div>
             </Link>
 
+            <div className={css.pizzaName}>
               <span>{pizza.name}</span>
               <span>
-                <span>$</span> {pizza.price[1]}</span>
+                <span>$</span> 
+                {pizza.price[1]}
+              </span>
+              </div>
             </div>
           );
         })}

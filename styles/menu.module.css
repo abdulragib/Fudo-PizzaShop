@@ -56,3 +56,36 @@
 .pizza:hover{
   cursor: pointer;
 }
+
+.pizzaName{
+    display:flex;
+    flex-direction: column;
+}
+
+@media only screen and (max-width:768px) {
+    .container{
+        margin-top:2rem;
+    }
+    .heading{
+        align-items:center;
+        text-align:center;
+    }
+    .heading>:nth-child(2),.heading>:nth-child(3){
+        font-size:1.5rem;
+    }
+    .ImageWrapper{
+        height:12rem;
+        width:18rem;
+    }
+    .pizza{
+        font-size:1rem;
+    }
+
+    .pizzaName{
+        width:90%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: space-between;
+        margin-left:0.8rem;
+    }
+}

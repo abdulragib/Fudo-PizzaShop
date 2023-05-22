@@ -118,6 +118,15 @@
 @media only screen and (max-width:768px) {
     .heroText{
         font-size:2rem;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width:100%;
+    }
+
+    .miniText{
+        width:97%;
+        text-align:center;
     }
 
     .container{
@@ -162,4 +171,14 @@
         width:1.7rem;
         height:1.7rem;
     }
+
+    .cherryDiv{
+        margin:0 auto;
+    }
+
+    .btn{
+        padding:0.7rem 2rem;
+        margin:0 auto;
+    }
+
 }
