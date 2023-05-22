@@ -72,11 +72,11 @@ export default function OrderModal({ opened, setOpened, PaymentMethod }) {
         <span>
           {PaymentMethod == 1 ? (
             <span>
-              You Paid <span className="dollar">$ {total}</span> via Card
+              You Paid <span className="dollar">${total}</span> via Card
             </span>
           ) : (
             <span>
-              You will pay <span className="dollar">$ {total}</span> on delivery
+              You will pay <span className="dollar">${total}</span> on delivery
             </span>
           )}
         </span>

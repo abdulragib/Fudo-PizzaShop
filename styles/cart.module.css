@@ -66,7 +66,7 @@
 .buttons>:nth-child(1){
    background-color: transparent;
    color:var(--themeRed);
-   border:2px solid var(--themeRed)
+   border:2px solid var(--themeRed);
 }
 
 @media only screen and (max-width: 768px) {
