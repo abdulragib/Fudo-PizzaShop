@@ -91,12 +91,12 @@ export default function Cart() {
                           : "Large"}
                       </td>
                       <td>
-                        <span style={{ color: "var(--themeRed)" }}>$ </span>
+                        <span style={{ color: "var(--themeRed)" }}>$</span>
                         {pizza.price}
                       </td>
                       <td>{pizza.quantity}</td>
                       <td>
-                        <span style={{ color: "var(--themeRed)" }}>$ </span>
+                        <span style={{ color: "var(--themeRed)" }}>$</span>
                         {pizza.price * pizza.quantity}
                       </td>
                       <td
