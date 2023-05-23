@@ -5,6 +5,7 @@ import { UilShoppingBag, UilReceipt } from "@iconscout/react-unicons";
 import { useStore } from "../store/store";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import TemporaryDrawer from "./Drawer";
 
 export default function Header() {
   const [Order, setOrder] = useState("");
@@ -48,6 +49,10 @@ export default function Header() {
             </div>
           </Link>
         )}
+      </div>
+
+      <div className="mobile-drawer">
+            <TemporaryDrawer/>
       </div>
     </div>
   );
