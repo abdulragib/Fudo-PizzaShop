@@ -1,3 +1,4 @@
+import React from "react";
 import css from "../styles/header.module.css";
 import Image from "next/image";
 import Logo from "../assets/Logo.png";
@@ -5,8 +6,10 @@ import Link from "next/link";
 import { UilShoppingBag, UilReceipt } from "@iconscout/react-unicons";
 import { useStore } from "../store/store";
 import { useEffect, useState } from "react";
-import TemporaryDrawer from "./Drawer";
-import dynamic from 'next/dynamic';
+
+import Drawer from "@mui/material/Drawer";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import { IconButton } from "@mui/material";
 
 const Header = () => {
   const [Order, setOrder] = useState("");
@@ -15,7 +18,7 @@ const Header = () => {
   }, []);
 
   const items = useStore((state) => state.cart.pizzas.length);
-
+  const [open, setOpen] = useState(false);
   return (
     <div className={css.header}>
       {/* logo side */}
@@ -57,23 +60,24 @@ const Header = () => {
       </div>
 
       <div className={css.mobile_drawer}>
-        <TemporaryDrawer />
+          <IconButton onClick={() => setOpen(true)}>
+            <MenuRoundedIcon className={css.link} />
+          </IconButton>
+          <Drawer anchor={"right"} open={open} onClose={() => setOpen(false)}>
+            <div className={css.drawer_div}>
+              <Link href="../" onClick={() => setOpen(false)}>
+                <p className={css.link}>Home</p>
+              </Link>
+              <Link href="/menu" onClick={() => setOpen(false)}>
+                <p className={css.link}>Menu</p>
+              </Link>
+              <Link href="/contact" onClick={() => setOpen(false)}>
+                <p className={css.link}>Contact</p>
+              </Link>
+            </div>
+          </Drawer>
       </div>
     </div>
   );
 };
-
-// Load BrowserRouter component on the client-side using dynamic import
-const DynamicBrowserRouter = dynamic(() => import('react-router-dom').then(module => module.BrowserRouter), {
-  ssr: false // Set ssr to false to only load on the client-side
-});
-
-const App = () => {
-  return (
-    <DynamicBrowserRouter>
-      <Header />
-    </DynamicBrowserRouter>
-  );
-};
-
-export default App;
+export default Header;

@@ -63,6 +63,20 @@
     display:none;
 }
 
+
+.link{
+    color:var(--grey);
+    font-weight:600;
+    font-size:1rem;
+    width:2rem;
+    height:2rem;
+}
+
+.link:hover{
+    color:var(--themeRed);
+    transition:all 0.3s ease-in-out;
+}
+
 @media only screen and (max-width:768px) {
     .cart{
         margin-right:0.5rem;
@@ -73,9 +87,15 @@
 
     .mobile_drawer{
         display:block;
-        color:var(--white);
+        color:var(--themeRed);
         font-size:1.5rem;
         cursor:pointer;
+    }
+    .drawer_div{
+        width:40vw;
+        background-color:var(--background-color);
+        height:100vh;
+        padding:1.5rem;
     }
 }
 
