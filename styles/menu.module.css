@@ -10,6 +10,7 @@
     flex-direction:column;
     font-weight: bold;
     justify-content:flex-start;
+    margin-left:2rem;
 }
 
 .heading:nth-child(1){

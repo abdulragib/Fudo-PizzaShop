@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import css from "../styles/contact.module.css"
+import Layout from "../components/Layout";
 
 const ContactUs = () => {
   const [fullName, setFullName] = useState("");
@@ -12,6 +13,7 @@ const ContactUs = () => {
   };
 
   return (
+    <Layout>
     <div className={css.contact_us_container} >
       <h2>Contact Us</h2>
       <form className={css.form_data} onSubmit={handleSubmit}>
@@ -39,6 +41,7 @@ const ContactUs = () => {
         <button className={css.btn} type="submit">Submit</button>
       </form>
     </div>
+    </Layout>
   );
 };
 
