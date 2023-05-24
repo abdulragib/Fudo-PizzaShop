@@ -68,7 +68,7 @@ const Header = () => {
               <Link href="../" onClick={() => setOpen(false)}>
                 <p className={css.link}>Home</p>
               </Link>
-              <Link href="/menu" onClick={() => setOpen(false)}>
+              <Link href="#" onClick={() => setOpen(false)}>
                 <p className={css.link}>Menu</p>
               </Link>
               <Link href="/contact" onClick={() => setOpen(false)}>
