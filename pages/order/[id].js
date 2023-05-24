@@ -4,7 +4,7 @@ import { client } from "../../lib/client"
 import css from '../../styles/order.module.css'
 import {UilBill,UilBox} from '@iconscout/react-unicons';
 import cooking from '../../assets/cooking.png'
-import Onway from '../../assets/Onway.png'
+import Onway from "../../assets/onway.png"
 import Spinner from '../../assets/spinner.svg'
 import { useEffect } from "react";
 
