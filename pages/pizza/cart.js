@@ -50,7 +50,7 @@ export default function Cart() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(localCart.pizzas),
+      body: JSON.stringify(localCart),
     });
 
     if (response.status === 500) return;

@@ -1,6 +1,7 @@
 .container{
     display:flex;
     position:relative;
+    margin-top:4rem;
 }
 
 .left{
