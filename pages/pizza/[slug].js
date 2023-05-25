@@ -4,7 +4,7 @@ import { client, urlFor } from "../../lib/client";
 import css from "../../styles/pizza.module.css";
 import leftArrow from "../../assets/arrowLeft.png";
 import rightArrow from "../../assets/arrowRight.png";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { useStore } from "../../store/store";
 import toast,{Toaster} from "react-hot-toast";
 
@@ -22,6 +22,13 @@ export default function Pizza({ pizza }) {
       ? null
       : setQuantity((prev) => prev - 1);
   };
+
+  //setting cart data in local storage
+  const cart = useStore((state) => state.cart.pizzas);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   //add to cart
   const addPizza=useStore((state)=>state.addPizza)

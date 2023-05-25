@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Image from "next/image";
 import Layout from "../../components/Layout";
 import css from "../../styles/cart.module.css";
@@ -12,9 +12,18 @@ export default function Cart() {
   const CartData = useStore((state) => state.cart);
   const removePizza = useStore((state) => state.removePizza);
   const [PaymentMethod, setPaymentMethod] = useState(null);
+  const [localCart, setLocalCart] = useState([]);
+
   const [Order, setOrder] = useState(
     typeof window !== "undefined" && localStorage.getItem("order")
   );
+
+  useEffect(() => {
+    const data = localStorage.getItem("cart");
+    if (data) {
+      setLocalCart(JSON.parse(data));
+    }
+  }, [CartData]);
 
   const handleRemove = (i) => {
     removePizza(i);
@@ -24,10 +33,10 @@ export default function Cart() {
   const router = useRouter();
 
   const total = () =>
-    CartData.pizzas.reduce((a, b) => a + b.quantity * b.price, 0);
+    localCart.reduce((a, b) => a + b.quantity * b.price, 0);
 
   const handleOnDelivery = () => {
-    if (CartData.pizzas.length > 0) {
+    if (localCart.length > 0) {
       setPaymentMethod(0);
       typeof window !== "undefined" && localStorage.setItem("total", total());
     }
@@ -41,7 +50,7 @@ export default function Cart() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(CartData.pizzas),
+      body: JSON.stringify(localCart.pizzas),
     });
 
     if (response.status === 500) return;
@@ -66,8 +75,8 @@ export default function Cart() {
               <th></th>
             </thead>
             <tbody className={css.tbody}>
-              {CartData.pizzas.length > 0 &&
-                CartData.pizzas.map((pizza, i) => {
+              {localCart.length > 0 &&
+                localCart.map((pizza, i) => {
                   const src = urlFor(pizza.image).url();
                   return (
                     <tr key={i}>
@@ -118,7 +127,7 @@ export default function Cart() {
           <div className={css.CartDetails}>
             <div>
               <span>Items</span>
-              <span> {CartData.pizzas.length}</span>
+              <span> {localCart.length}</span>
             </div>
 
             <div>
@@ -127,7 +136,7 @@ export default function Cart() {
             </div>
           </div>
 
-          {!Order && CartData.pizzas.length > 0 ? (
+          {!Order && localCart.length > 0 ? (
             <div className={css.buttons}>
               <button className="btn" onClick={handleOnDelivery}>
                 Pay on Delivery

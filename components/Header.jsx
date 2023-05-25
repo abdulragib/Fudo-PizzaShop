@@ -17,7 +17,10 @@ const Header = () => {
     setOrder(localStorage.getItem("order"));
   }, []);
 
-  const items = useStore((state) => state.cart.pizzas.length);
+  var cartItems = typeof window !== "undefined" && localStorage.getItem("cart") 
+  ? JSON.parse(localStorage.getItem("cart")) : [];
+
+  
   const [open, setOpen] = useState(false);
   return (
     <div className={css.header}>
@@ -45,7 +48,7 @@ const Header = () => {
         <Link href="/pizza/cart">
           <div className={css.cart}>
             <UilShoppingBag size={35} color="#2E2E2E" />
-            <div className={css.badge}>{items}</div>
+            <div className={css.badge}>{cartItems.length>0 ? cartItems.length : 0}</div>
           </div>
         </Link>
 
