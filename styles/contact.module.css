@@ -4,7 +4,6 @@
     justify-content: flex-start;
     align-items:center;
     margin:1rem;
-    
 }
 
 .contact_us_container>label{
@@ -57,7 +56,7 @@
 
 @media only screen and (max-width: 768px) {
     .contact_us_container{
-        height:100vh;
+        height:68vh;
     }
     .form_data>input{
         width:15rem;
