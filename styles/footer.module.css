@@ -61,8 +61,8 @@
   
   @media only screen and (max-width: 800px) {
     .footer {
-      margin: 2.5rem 0.5rem;
-      margin-bottom: 5rem;
+      margin: 5.5rem 0.5rem;
+      margin-bottom: 2rem;
     }
   
     .footer h2 {
