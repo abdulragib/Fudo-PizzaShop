@@ -9,7 +9,6 @@ import OrderModal from "../../components/OrderModal";
 import { useRouter } from "next/router";
 
 export default function Cart() {
-  const CartData = useStore((state) => state.cart);
   const removePizza = useStore((state) => state.removePizza);
   const [PaymentMethod, setPaymentMethod] = useState(null);
   const [localCart, setLocalCart] = useState([]);
@@ -18,12 +17,15 @@ export default function Cart() {
     typeof window !== "undefined" && localStorage.getItem("order")
   );
 
+  const cart = useStore((state) => state.cart.pizzas);
+
   useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
     const data = localStorage.getItem("cart");
     if (data) {
       setLocalCart(JSON.parse(data));
     }
-  }, [CartData]);
+  }, [cart]);
 
   const handleRemove = (i) => {
     removePizza(i);
